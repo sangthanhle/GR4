@@ -76,15 +76,8 @@ SELECT  NHANVIEN.HONV ,NHANVIEN.TENLOT , NHANVIEN.TENNV , SUBSTRING (DCHI,4,15) 
 	GROUP BY  NHANVIEN.HONV, NHANVIEN.TENLOT, NHANVIEN.TENNV ,SUBSTRING (DCHI,4,15)
 	HAVING COUNT(THANNHAN.MA_NVIEN) > 2
 
---Cho biết tên phòng ban và họ tên trưởng phòng của phòng ban có đông nhân viên nhất, hiển thị thêm một cột thay thế tên trưởng phòng bằng tên “Fpoly”
-SELECT PHONGBAN.TENPHG, (NHANVIEN.HONV + ' ' + NHANVIEN.TENLOT + ' ' + NHANVIEN.TENNV) AS 'Họ tên trưởng phòng của phòng ban đông nhân viên nhất'
-	FROM NHANVIEN, PHONGBAN
-	WHERE NHANVIEN.MANV = PHONGBAN.TRPHG AND
-		  PHONGBAN.MAPHG = (SELECT TOP 1 PHONGBAN.MAPHG
-							FROM NHANVIEN, PHONGBAN
-							WHERE NHANVIEN.PHG = PHONGBAN.MAPHG
-							GROUP BY PHONGBAN.MAPHG
-							ORDER BY COUNT (NHANVIEN.PHG) DESC)
+--Cho biết tên phòng ban và họ tên trưởng phòng của phòng ban có đông nhân viên nhất, hiển thị thêm một cột thay thế tên trưởng phòng bằng tên “Fpoly”
+
 --bài 4
 /*Cho biết các nhân viên có năm sinh trong khoảng 1960 đến 1965.*/
 SELECT (HONV + ' ' + TENLOT + ' '+ TENNV) AS 'TÊN NHÂN VIÊN', CONVERT(VARCHAR,NGSINH,105) AS 'NĂM SINH'
@@ -94,3 +87,6 @@ WHERE (YEAR(NGSINH) BETWEEN 1960 AND 1965)
 /*Cho biết tuổi của các nhân viên tính đến thời điểm hiện tại.*/
 SELECT (NHANVIEN.HONV + ' ' + NHANVIEN.TENLOT + ' '+ NHANVIEN.TENNV) as 'Họ và Tên', (YEAR(GETDATE()) - YEAR(NHANVIEN.NGSINH)) AS 'Tuổi'
 	FROM NHANVIEN
+/*Dựa vào dữ liệu NGSINH, cho biết nhân viên sinh vào thứ mấy.*/
+SELECT TENNV, DATENAME(WEEKDAY, YEAR(NGSINH)) AS 'NHÂN VIÊN SINH VÀO THỨ'
+FROM NHANVIEN
