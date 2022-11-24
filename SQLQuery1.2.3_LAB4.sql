@@ -7,8 +7,8 @@ AS ChucVu,TENNV,Luong FROM NHANVIEN
 go
 --
 SELECT TENNV = CASE PHAI
-WHEN 'nam' then 'Mr '+[TENNV]
-WHEN 'Nữ'  then 'Ms '+ [TENNV]
+WHEN N'nam' then 'Mr '+[TENNV]
+WHEN N'Nữ'  then 'Ms '+ [TENNV]
 ELSE TENNV
 end
 FROM NHANVIEN
