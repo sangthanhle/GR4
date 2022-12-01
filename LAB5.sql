@@ -77,7 +77,7 @@ END
 
 EXEC Bai2_2 1
 go
---2.3
+--2_
 CREATE PROC Bai2_3 @mada INT, @Ddiem_DA nvarchar(15)
 AS
 BEGIN
